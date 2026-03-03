@@ -1,0 +1,9 @@
+# Copy this file to prod.tfvars or dev.tfvars and adjust values.
+#
+# Usage:
+#   terraform plan  -var-file=dev.tfvars
+#   terraform apply -var-file=prod.tfvars
+
+environment = "dev"               # "prod" or "dev"
+aws_region  = "us-east-1"         # Primary AWS region
+domain_name = "ihatetimezones.com"
