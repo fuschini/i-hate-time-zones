@@ -26,7 +26,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      project     = "ihatetimezones"
+      project     = "i_hate_time_zones"
       environment = var.environment
     }
   }
@@ -39,7 +39,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      project     = "ihatetimezones"
+      project     = "i_hate_time_zones"
       environment = var.environment
     }
   }
