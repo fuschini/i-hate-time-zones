@@ -425,30 +425,16 @@
   <header class="site-header">
     <p class="site-header__org">International Coalition for Temporal Sanity</p>
     <h1 class="site-header__title">ihatetimezones.com</h1>
-    <nav class="site-header__nav">
-      <a href="#">Wall of Pain</a>
-      <a href="#" class="active">The Manifesto</a>
-      <a href="#">Horror Gallery</a>
-      <a href="#">Sign</a>
-    </nav>
   </header>
 
   <div class="hero">
-    <p class="hero__doc-id">Document ICTS/2025/001 — Ratified in Perpetuity</p>
     <h2 class="hero__title">A Formal Case for the Abolition of Time Zones</h2>
-    <p class="hero__subtitle">Submitted to the global community of software engineers, schedulers, remote workers, and anyone who has ever Googled "what time is it in India right now"</p>
-    <p class="hero__date">Adopted — 2025 &nbsp;·&nbsp; Earth, UTC±???</p>
+    <p class="hero__subtitle">Submitted to the global community of software engineers, meeting schedulers, remote workers, and anyone who has ever Googled "what time is it in ... right now"</p>
+    <p class="hero__date">Established — 2026</p>
     <div class="hero__separator"></div>
   </div>
 
   <main class="document">
-
-    <!-- ═══ PREAMBLE ═══ -->
-    <section>
-      <p class="preamble">
-        We, the undersigned developers, project managers, remote workers, and victims of Daylight Saving Time, having suffered greatly and without reasonable justification, do hereby present this manifesto to the global community. We have written it in UTC. We think. Honestly, we're not sure anymore.
-      </p>
-    </section>
 
     <!-- ═══ SECTION I ═══ -->
     <section>
@@ -456,44 +442,28 @@
       <h3 class="section-title">The Indictment</h3>
 
       <p>
-        Time zones, as currently implemented, are a system of <strong>37 parallel realities</strong> coexisting on a single planet. Not 24, as a reasonable person might assume — 37. Because the International Date Line has opinions, half-hour offsets exist for reasons no one alive can explain, and Nepal chose UTC+5:45 apparently out of sheer defiance.
+        Time zones, as currently implemented, are a system of <strong>37 parallel realities</strong> coexisting on a single planet. Not 24, as a reasonable person might assume — 37. Because the International Date Line has opinions, half-hour offsets exist for reasons no one alive can explain, and Nepal chose UTC+5:45 out of sheer defiance.
       </p>
 
       <p>
-        This system was designed in the 19th century to solve a railroad scheduling problem. We have since split the atom, walked on the Moon, and connected every human being on Earth through a network of undersea cables. <strong>We are still using railroad time.</strong>
+        For thousands of years, the sun was the best clock available. A stick in the ground, a shadow on a dial — that was the state of the art. Time was local by necessity because the only reference point was the sky overhead. Noon meant the sun was at its highest. Midnight meant it wasn't. Every village had its own time, and that was fine, because nobody needed to coordinate with a village 500 miles away.
       </p>
 
       <p>
-        The consequences are not theoretical. They are felt every single day by every person who has ever attempted to coordinate anything across more than one meridian. Consider the following evidence.
+        Then came the railroads. British railways were the first to feel the pain — by the 1840s, they had largely standardized to Greenwich Mean Time just to keep schedules coherent. Across the Atlantic, hundreds of American cities still kept their own local solar time. Pittsburgh was 20 minutes ahead of Columbus. When a train schedule said "arrives at 4:00," the obvious question was: <strong>whose 4:00?</strong> Trains were crashing. Passengers were stranded.
       </p>
 
-      <div class="exhibit">
-        <span class="exhibit__label">Exhibit A — The Scheduling Paradox</span>
-        <p>
-          It is currently impossible to schedule a one-hour meeting between a team in San Francisco, a team in London, and a team in Tokyo during hours that all three parties would describe as "reasonable." This is not a logistical failure. It is a mathematical impossibility imposed by the system itself.
-        </p>
-      </div>
+      <p>
+        The solution came from multiple directions at once. Sir Sandford Fleming, a Canadian railway engineer, proposed a worldwide system of 24 standardized time zones as early as 1879. American railroads unilaterally carved the continent into four zones on November 18, 1883 — "The Day of Two Noons." And in 1884, the International Meridian Conference in Washington D.C. brought 25 nations together to establish Greenwich as the prime meridian and lay the groundwork for global time standardization. By 1929, most countries had adopted the system.
+      </p>
 
-      <div class="exhibit">
-        <span class="exhibit__label">Exhibit B — The Daylight Saving Time Incident(s)</span>
-        <p>
-          Twice per year, approximately 70 countries collectively agree to <strong>change what time it is</strong> — but not on the same day, and not by the same amount, and some of them opt out entirely, and Arizona opts out but the Navajo Nation within Arizona opts back in, but the Hopi Reservation within the Navajo Nation opts back out again.
-        </p>
-        <p>
-          On these days, every cron job, scheduled task, recurring meeting, and automated deployment becomes a roulette wheel. Production databases have been corrupted. Medical appointments have been missed. One developer, whose identity we protect, reportedly shipped a billing system that charged customers for 25 hours on a 23-hour day.
-        </p>
-      </div>
+      <p>
+        Meanwhile, the science of timekeeping moved on. Quartz oscillators. Cesium atomic clocks accurate to one second in 300 million years. GPS satellites broadcasting coordinated universal time to every device on Earth. The ability to measure time has advanced by orders of magnitude — and yet the system for <em>displaying</em> it remains anchored to the sun. The same sun. The same shadows. The same ancient instinct that noon should feel like noon and midnight should feel like midnight.
+      </p>
 
-      <div class="exhibit">
-        <span class="exhibit__label">Exhibit C — The JavaScript Date Object</span>
-        <p>
-          We present, without further commentary: <code>new Date().toLocaleString()</code>. The output of this function changes depending on the machine, the operating system, the browser, the locale, the phase of the moon, and what the developer had for breakfast. It is the most unreliable function in the most widely deployed programming language on Earth. Time zones are why.
-        </p>
-      </div>
-
-      <div class="aside-note">
-        It should be noted that Java's original date/time API was so catastrophically broken by timezone handling that they had to replace it entirely in Java 8. The old API still haunts legacy systems like a vengeful ghost.
-      </div>
+      <p>
+        That instinct made sense when sundials were cutting-edge technology. It makes considerably less sense in a world where a server in Virginia processes a request from a phone in Tokyo, timestamps it in a database hosted in Ireland, and sends a confirmation to an inbox in São Paulo — all in under 200 milliseconds. The sun is irrelevant to this transaction. <strong>The clock should be too.</strong>
+      </p>
     </section>
 
     <!-- ═══ SECTION II ═══ -->
@@ -510,11 +480,11 @@
       </p>
 
       <p>
-        Every one of these changes propagates through every operating system, every database, every programming language, every API, every IoT device, every airline booking system, and every calendar application on the planet. The downstream cost of a single government's decision to shift its UTC offset by 30 minutes is measured in <strong>millions of developer hours.</strong>
+        Updating a clock is trivial — operating systems handle that automatically. The real cost is in the <strong>business logic built around the clock.</strong> Every application that schedules, bills, reminds, expires, or recurs must account for the fact that users exist in different time zones and that those zones shift unpredictably. "Send this notification at 9 AM" means writing code that knows what 9 AM means for every user, in every zone, on every day of the year — including the days when some zones jump forward, some jump back, and some do nothing at all. That logic is where the millions of developer hours go.
       </p>
 
       <p>
-        And yet we accept this. We accept it because we have never known anything else, and because the alternative seems unthinkable. This manifesto exists to make it thinkable.
+        And yet the world accepts this. Accepts it because nothing else has ever been known, and because the alternative seems unthinkable. This manifesto exists to make it thinkable.
       </p>
     </section>
 
@@ -524,20 +494,20 @@
       <h3 class="section-title">The Proposal</h3>
 
       <p>
-        We propose a world that operates on a single, universal, coordinated clock. No offsets. No conversions. No "well, it's 3pm here, but what time is it there?" Just one time. Everywhere. For everyone. Always.
+        Picture a world that operates on a single, universal, coordinated clock. No offsets. No conversions. No "well, it's 3pm here, but what time is it there?" Just one time. Everywhere. For everyone. Always.
       </p>
 
       <div class="article">
         <span class="article__number">I</span>
         <p class="article__text">
-          All clocks, worldwide, shall display the same time. We are agnostic about whether this is called UTC, Universal Time, or something more inspiring. We are open to suggestions. "Earth Time" has been proposed.
+          All clocks, worldwide, shall display the same time. Whether this is called UTC, Universal Time, or something more inspiring is unimportant. Suggestions are welcome. "Earth Time" has been proposed.
         </p>
       </div>
 
       <div class="article">
         <span class="article__number">II</span>
         <p class="article__text">
-          <strong>Local schedules shall adapt to universal time, not the other way around.</strong> If your business hours in Tokyo are 01:00 to 09:00, so be it. The numbers on the clock are arbitrary. The sun does not care what your watch says.
+          <strong>Local schedules shall adapt to Earth Time, not the other way around.</strong> If your business hours in Tokyo are 01:00 to 09:00, so be it. The numbers on the clock are arbitrary. The sun does not care what your watch says.
         </p>
       </div>
 
@@ -558,7 +528,7 @@
       <div class="article">
         <span class="article__number">V</span>
         <p class="article__text">
-          We acknowledge that this transition would require a period of adjustment. We also acknowledge that this adjustment would be less painful than what developers currently endure every March and November.
+          <strong>Time shall be represented exclusively in 24-hour format.</strong> AM and PM are relics of a sun-based system — "ante meridiem" and "post meridiem" literally mean "before midday" and "after midday." When the clock is no longer tied to the sun, the concept of midday as a fixed point loses all meaning. 24-hour time is unambiguous, universal, and already used by aviation, medicine, and the military. The rest of the world can catch up.
         </p>
       </div>
     </section>
@@ -569,14 +539,14 @@
       <h3 class="section-title">Objections and Rebuttals</h3>
 
       <p>
-        We anticipate resistance. Humanity has been dividing the Earth into temporal fiefdoms since 1883. Below, we address the most common objections with the seriousness they deserve — which, to be clear, is very little.
+        Resistance is anticipated. Humanity has been dividing the Earth into temporal fiefdoms since 1883. Below, the most common objections are addressed with the seriousness they deserve — which, to be clear, is very little.
       </p>
 
       <div class="rebuttal">
         <p class="rebuttal__claim">But people need the sun to be up during the day!</p>
         <div class="rebuttal__response">
           <p>
-            They do. And it still will be. Universal time does not move the sun. It changes the number on the clock when the sun is up. If sunrise in your city happens at 22:00 Universal Time, you simply know that your day starts at 22:00. You already know that "lunch" is at different clock-times depending on your culture. In Spain, lunch is at 14:00. In Japan, it's at 12:00. Did Spain collapse because their lunch number is different? No.
+            They do. And it still will be. Earth Time does not move the sun. It changes the number on the clock when the sun is up. If sunrise in your city happens at 22:00 Earth Time, you simply know that your day starts at 22:00. You already know that "lunch" is at different clock-times depending on your culture. In Spain, lunch is at 14:00. In Japan, it's at 12:00. Did Spain collapse because their lunch number is different? No.
           </p>
           <p>
             The association between "12:00" and "noon" is arbitrary. It is learned, not innate. Children in a universal-time world would learn their local "daylight hours" the same way they currently learn that bedtime is at 20:00 — by being told.
@@ -624,7 +594,7 @@
             The metric system was radical. Decimal currency was radical. Abolishing the Julian calendar in favor of the Gregorian calendar was radical — and that transition was so messy that some countries didn't adopt it until the <strong>20th century</strong>, resulting in the October Revolution actually happening in November.
           </p>
           <p>
-            Every major improvement to how humans coordinate has been called impractical until it was implemented, at which point it was called obvious. We are simply asking to be ahead of that curve.
+            Every major improvement to how humans coordinate has been called impractical until it was implemented, at which point it was called obvious. This manifesto simply asks to be ahead of that curve.
           </p>
         </div>
       </div>
@@ -633,7 +603,7 @@
         <p class="rebuttal__claim">But my culture's traditions are tied to specific clock times!</p>
         <div class="rebuttal__response">
           <p>
-            Traditions are tied to events, not numbers. "We eat dinner when the sun sets" is a tradition. "We eat dinner at 19:00" is a convention. If sunset in your city moves to 02:00 Universal Time, your tradition is perfectly intact — you eat when the sun sets. The number changed. The tradition didn't.
+            Traditions are tied to events, not numbers. "Dinner when the sun sets" is a tradition. "Dinner at 19:00" is a convention. If sunset in your city moves to 02:00 Earth Time, the tradition is perfectly intact — dinner happens when the sun sets. The number changed. The tradition didn't.
           </p>
           <p>
             Ramadan already follows a calendar entirely disconnected from the Gregorian clock. Jewish Shabbat begins at sunset, not at a fixed time. These traditions survived the introduction of Standard Time in 1883. They will survive this too.
@@ -648,43 +618,27 @@
       <h3 class="section-title">A Final Word</h3>
 
       <p>
-        We do not expect the world to change overnight. Time zones are deeply embedded in law, in infrastructure, in the human psyche. Abolishing them would require international cooperation on a scale that humanity has rarely achieved.
+        The world will not change overnight. Time zones are deeply embedded in law, in infrastructure, in the human psyche. Abolishing them would require international cooperation on a scale that humanity has rarely achieved.
       </p>
 
       <p>
-        But we have achieved it before. We agreed on the meter. We agreed on the second. We agreed on TCP/IP. We put a man on the Moon and brought him back using a computer with less memory than the device you are reading this on.
+        But it has been achieved before. The meter. The second. TCP/IP. A man on the Moon and back, using a computer with less memory than the device displaying this page.
       </p>
 
       <p>
-        We can agree on what time it is.
+        Agreeing on what time it is should not be this hard.
       </p>
 
       <p>
-        Until that day, we will continue to file bug reports, miss meetings, and stare at timezone conversion charts with the hollow expression of people who have been betrayed by a system they did not choose and cannot escape. <strong>But we will not be silent.</strong>
+        Until that day, developers will continue to file bug reports and stare at timezone conversion charts with the hollow expression of people betrayed by a system they did not choose and cannot escape. <strong>But silence is no longer an option.</strong>
       </p>
-
-      <div class="aside-note">
-        This document was drafted at 14:32 UTC. The authors are located in at least four different "time zones" and cannot agree on whether it is currently today, yesterday, or tomorrow. This is precisely the problem.
-      </div>
     </section>
 
   </main>
 
-  <!-- ═══ CLOSING CTA ═══ -->
-  <div class="closing">
-    <h3 class="closing__title">Join the Coalition</h3>
-    <p class="closing__text">
-      Add your name to the growing list of people who have had enough. Share your timezone horror story. Together, we can make time simple.
-    </p>
-    <a href="#" class="closing__cta">Sign the Manifesto</a>
-    <p class="closing__note">
-      Your signature will be recorded in UTC. Obviously.
-    </p>
-  </div>
-
   <footer class="site-footer">
-    <p>© 2025 International Coalition for Temporal Sanity</p>
-    <p>A project born from frustration, sustained by spite, and hosted in a region whose timezone we refuse to acknowledge.</p>
+    <p>© 2026 International Coalition for Temporal Sanity</p>
+    <p>A project born from frustration, sustained by spite, and hosted in a region whose timezone shall not be acknowledged.</p>
   </footer>
 
   <script>
