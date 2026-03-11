@@ -425,6 +425,22 @@
       .article { flex-direction: column; gap: 0.25rem; }
       .article__number { text-align: left; }
     }
+
+    .scroll-indicator {
+      color: var(--color-ink-muted);
+      opacity: 0.6;
+      animation: bobble 2s ease-in-out infinite;
+      transition: opacity 0.6s ease;
+      margin-top: 1.5rem;
+    }
+    .scroll-indicator.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    @keyframes bobble {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
   </style>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageviewId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -453,6 +469,11 @@
     <p class="hero__subtitle">Submitted to the global community of software engineers, meeting schedulers, remote workers, and anyone who has ever Googled "what time is it in ... right now"</p>
     <p class="hero__date">Established — 2026</p>
     <div class="hero__separator"></div>
+    <div class="scroll-indicator" id="scrollIndicator">
+      <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L10 9L19 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
   </div>
 
   <main class="document">
@@ -679,6 +700,11 @@
       s.style.animationPlayState = 'paused';
       observer.observe(s);
     });
+
+    window.addEventListener('scroll', function() {
+      var el = document.getElementById('scrollIndicator');
+      if (el && window.scrollY > 50) el.classList.add('hidden');
+    }, { passive: true });
   </script>
 
 </body>
