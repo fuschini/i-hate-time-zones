@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:opsz,wght@8..60,400&family=DM+Mono:wght@400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    background: #FAFAF7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .border {
+    position: absolute;
+    inset: 16px;
+    border: 2px solid #D4D3CB;
+    pointer-events: none;
+  }
+
+  .top-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 21px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #8A8A82;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-size: 72px;
+    font-weight: 900;
+    color: #1A1A18;
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  h1 span {
+    color: #8B2500;
+  }
+
+  .rule {
+    width: 80px;
+    height: 2px;
+    background: #D4D3CB;
+    margin: 20px 0;
+  }
+
+  .subtitle {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 33px;
+    color: #4A4A45;
+    text-align: center;
+    max-width: 700px;
+    line-height: 1.5;
+  }
+
+  .url {
+    font-family: 'DM Mono', monospace;
+    font-size: 24px;
+    color: #8A8A82;
+    position: absolute;
+    bottom: 36px;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+  <div class="border"></div>
+  <p class="top-label">International Coalition for Temporal Sanity</p>
+  <h1>I <span>Hate</span> Time Zones</h1>
+  <div class="rule"></div>
+  <p class="subtitle">A formal case for the abolition of time zones &mdash; submitted to software engineers, meeting schedulers, and the perpetually confused.</p>
+  <p class="url">ihatetimezones.com</p>
+</body>
+</html>
