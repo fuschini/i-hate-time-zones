@@ -274,6 +274,17 @@ resource "aws_route53_record" "www_aaaa" {
   }
 }
 
+# Google Search Console verification (prod only)
+resource "aws_route53_record" "google_site_verification" {
+  count = local.is_prod ? 1 : 0
+
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = var.domain_name
+  type    = "TXT"
+  ttl     = 300
+  records = ["google-site-verification=UpikI6FXmpl9xdU9U7qnUzABawDuxxoWBvLdKS42tlk"]
+}
+
 # PostHog reverse proxy CNAME (prod only)
 resource "aws_route53_record" "posthog_proxy" {
   count = local.is_prod ? 1 : 0
