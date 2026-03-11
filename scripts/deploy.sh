@@ -51,6 +51,7 @@ fi
 echo "Reading Terraform outputs for '${ENVIRONMENT}'..."
 
 cd "${INFRA_DIR}"
+terraform workspace select "${ENVIRONMENT}" >/dev/null
 S3_BUCKET=$(terraform output -raw s3_bucket_name)
 CF_DISTRIBUTION_ID=$(terraform output -raw cloudfront_distribution_id)
 SITE_URL=$(terraform output -raw site_url)

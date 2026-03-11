@@ -273,3 +273,14 @@ resource "aws_route53_record" "www_aaaa" {
     evaluate_target_health = false
   }
 }
+
+# PostHog reverse proxy CNAME (prod only)
+resource "aws_route53_record" "posthog_proxy" {
+  count = local.is_prod ? 1 : 0
+
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = "m.${var.domain_name}"
+  type    = "CNAME"
+  ttl     = 300
+  records = ["3e4e068b1fd5fbc929cb.cf-prod-us-proxy.proxyhog.com"]
+}
