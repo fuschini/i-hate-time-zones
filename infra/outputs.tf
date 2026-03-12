@@ -17,3 +17,13 @@ output "site_url" {
   description = "URL of the deployed site"
   value       = "https://${local.site_domain}"
 }
+
+output "api_url" {
+  description = "API URL (custom domain)"
+  value       = "https://${local.api_domain}"
+}
+
+output "lambda_function_name" {
+  description = "Lambda function name (used by deploy-api.sh)"
+  value       = aws_lambda_function.sign_manifesto.function_name
+}

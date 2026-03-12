@@ -40,4 +40,13 @@ locals {
 
   # prod ACM cert covers both apex and www; dev only covers the subdomain
   acm_sans = local.is_prod ? ["www.${var.domain_name}"] : []
+
+  # API
+  api_name   = "ihatetimezones-${var.environment}-api"
+  api_domain = local.is_prod ? "api.${var.domain_name}" : "api.${var.environment}.${var.domain_name}"
+  cors_origins = local.is_prod ? [
+    "https://ihatetimezones.com",
+    "https://www.ihatetimezones.com"
+  ] : ["https://dev.ihatetimezones.com"]
+  from_email = "no-reply@${var.domain_name}"
 }
