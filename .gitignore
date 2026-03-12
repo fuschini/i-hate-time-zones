@@ -19,3 +19,9 @@ Thumbs.db
 # Editors
 .idea/
 .vscode/
+
+# Node
+node_modules/
+
+# Lambda build artifacts
+api/sign-manifesto/dist/
