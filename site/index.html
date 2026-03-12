@@ -400,6 +400,84 @@
       letter-spacing: 0.1em;
     }
 
+    .closing__count {
+      font-family: var(--font-mono);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400;
+      color: var(--color-accent);
+      margin: 1rem 0 0.25rem;
+      line-height: 1;
+    }
+
+    .closing__count-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-ink-muted);
+      margin-bottom: 2rem;
+    }
+
+    .closing__form {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      max-width: 480px;
+      margin: 0 auto 1rem;
+    }
+
+    .closing__input {
+      flex: 1;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--color-rule);
+      border-radius: 0;
+      background: var(--color-bg);
+      color: var(--color-ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .closing__input:focus {
+      border-color: var(--color-accent);
+    }
+
+    .closing__input::placeholder {
+      color: var(--color-ink-muted);
+    }
+
+    .closing__submit {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--color-ink);
+      color: var(--color-bg);
+      border: none;
+      padding: 0.75rem 2rem;
+      cursor: pointer;
+      transition: background 0.25s;
+      white-space: nowrap;
+    }
+
+    .closing__submit:hover {
+      background: var(--color-accent);
+    }
+
+    .closing__submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .closing__note--success {
+      color: var(--color-accent);
+    }
+
+    .closing__note--error {
+      color: #b91c1c;
+    }
+
     /* ── FOOTER ── */
     .site-footer {
       text-align: center;
@@ -448,6 +526,7 @@
       .site-header__nav { gap: 1.5rem; }
       .article { flex-direction: column; gap: 0.25rem; }
       .article__number { text-align: left; }
+      .closing__form { flex-direction: column; }
     }
 
     .scroll-indicator {
@@ -702,9 +781,30 @@
 
   </main>
 
+  <section class="closing" id="sign">
+    <h3 class="closing__title">Sign the Manifesto</h3>
+    <p class="closing__text">Join the growing coalition of those who refuse to accept 37 parallel realities on a single planet.</p>
+    <div class="closing__count" id="signatureCount">—</div>
+    <p class="closing__count-label">Supporters</p>
+    <form class="closing__form" id="signForm">
+      <input
+        type="email"
+        class="closing__input"
+        id="signEmail"
+        placeholder="your@email.com"
+        required
+        autocomplete="email"
+      />
+      <button type="submit" class="closing__submit" id="signButton">Sign</button>
+    </form>
+    <p class="closing__note" id="signMessage"></p>
+    <p class="closing__note" style="margin-top: 2rem; max-width: 480px; margin-left: auto; margin-right: auto;">We'll send you one confirmation email. Your email is stored to count supporters and prevent duplicates. We'll never share it. Want out? Email <a href="mailto:fusca@fuscripts.com" style="color: var(--color-accent);">fusca@fuscripts.com</a>.</p>
+  </section>
+
   <footer class="site-footer">
     <p>© 2026 International Coalition for Temporal Sanity</p>
     <p>A project born from frustration, sustained by spite, and hosted in a region whose timezone shall not be acknowledged.</p>
+    <p>Made by the creator of <a href="https://fuscripts.com" style="color: var(--color-accent);">fuscripts.com</a></p>
   </footer>
 
   <script>
@@ -729,6 +829,86 @@
       var el = document.getElementById('scrollIndicator');
       if (el && window.scrollY > 50) el.classList.add('hidden');
     }, { passive: true });
+  </script>
+
+  <script>
+    (function() {
+      var API_URL = window.location.hostname.match(/^(localhost|127\.0\.0\.1|dev\.ihatetimezones\.com)$/)
+        ? 'https://api.dev.ihatetimezones.com'
+        : 'https://api.ihatetimezones.com';
+
+      var countEl = document.getElementById('signatureCount');
+      var form = document.getElementById('signForm');
+      var emailInput = document.getElementById('signEmail');
+      var button = document.getElementById('signButton');
+      var messageEl = document.getElementById('signMessage');
+
+      function formatNumber(n) {
+        try { return new Intl.NumberFormat().format(n); } catch(e) { return String(n); }
+      }
+
+      // Load initial count
+      fetch(API_URL + '/count')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (typeof data.count === 'number') {
+            countEl.textContent = formatNumber(data.count);
+          }
+        })
+        .catch(function() {
+          // Silently fail — count will show "—"
+        });
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = emailInput.value.trim();
+        if (!email) return;
+
+        button.disabled = true;
+        button.textContent = 'Signing...';
+        messageEl.textContent = '';
+        messageEl.className = 'closing__note';
+
+        fetch(API_URL + '/sign', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        })
+        .then(function(r) { return r.json().then(function(d) { return { status: r.status, data: d }; }); })
+        .then(function(res) {
+          if (res.status === 200) {
+            messageEl.textContent = res.data.message;
+            messageEl.className = 'closing__note closing__note--success';
+            if (typeof res.data.count === 'number') {
+              countEl.textContent = formatNumber(res.data.count);
+            }
+            if (!res.data.duplicate) {
+              emailInput.disabled = true;
+              button.disabled = true;
+              button.textContent = 'Signed';
+              // Track in PostHog
+              if (window.posthog && typeof window.posthog.capture === 'function') {
+                window.posthog.capture('manifesto_signed');
+              }
+            } else {
+              button.disabled = false;
+              button.textContent = 'Sign';
+            }
+          } else {
+            messageEl.textContent = res.data.error || 'Something went wrong. Please try again.';
+            messageEl.className = 'closing__note closing__note--error';
+            button.disabled = false;
+            button.textContent = 'Sign';
+          }
+        })
+        .catch(function() {
+          messageEl.textContent = 'Something went wrong on our end. Please try again later.';
+          messageEl.className = 'closing__note closing__note--error';
+          button.disabled = false;
+          button.textContent = 'Sign';
+        });
+      });
+    })();
   </script>
 
 </body>
